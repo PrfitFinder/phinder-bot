@@ -21,14 +21,22 @@ def alerta():
     if not data:
         return '❌ No se recibió JSON', 400
 
-    mensaje = f"""
-📡 *Nueva Alerta de TradingView*
-📊 Símbolo: `{data.get('symbol', '❓')}`
-📈 Dirección: *{data.get('action', '❓')}*
-💰 Entrada: `{data.get('entry', '❓')}`
+mensaje = f"""
+📡 *Señal de TradingView*
+🔍 Estrategia: *{data.get('strategy', '❓')}*
 🧠 Setup: `{data.get('setup', '❓')}`
-🕒 Timeframe: `{data.get('timeframe', '❓')}`
-    """
+📊 Símbolo: `{data.get('symbol', '❓')}`
+
+📥 Entrada: `{data.get('entry', '❓')}`
+🛑 Stop Loss: `{data.get('stoploss', '❓')}`
+
+🎯 Take Profit:
+- TP1: `{data.get('tp1', '❓')}`
+- TP2: `{data.get('tp2', '❓')}`
+- TP3: `{data.get('tp3', '❓')}`
+
+🕒 Temporalidad: `{data.get('timeframe', '❓')}`
+"""
 
     # Enviar a Telegram
     response = requests.post(
