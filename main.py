@@ -3,8 +3,11 @@ import requests
 
 app = Flask(__name__)
 
-BOT_TOKEN = 'TU_TOKEN_DEL_BOT'
-CHAT_ID = 'ID_DEL_GRUPO_O_CANAL'
+# Token del bot de Telegram
+BOT_TOKEN = '7664866864:AAHr_QWJqM5mwPOEx449s3IAd2Kx5hRuTA4'
+
+# ID de chat (en este caso, tu cuenta personal)
+CHAT_ID = '1384640313'
 
 @app.route('/')
 def home():
@@ -18,18 +21,28 @@ def alerta():
     if not data:
         return '❌ No se recibió JSON', 400
 
-    mensaje = f"""📡 Nueva Alerta
-Símbolo: {data.get('symbol', '❓')}
-Dirección: {data.get('action', '❓')}
-Entrada: {data.get('entry', '❓')}
-Setup: {data.get('setup', '❓')}
-Temporalidad: {data.get('timeframe', '❓')}
+    mensaje = f"""
+📡 *Nueva Alerta de TradingView*
+📊 Símbolo: `{data.get('symbol', '❓')}`
+📈 Dirección: *{data.get('action', '❓')}*
+💰 Entrada: `{data.get('entry', '❓')}`
+🧠 Setup: `{data.get('setup', '❓')}`
+🕒 Timeframe: `{data.get('timeframe', '❓')}`
     """
 
-    requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data={{
-        "chat_id": CHAT_ID,
-        "text": mensaje
-    }})
+    # Enviar a Telegram
+    response = requests.post(
+        f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
+        data={
+            "chat_id": CHAT_ID,
+            "text": mensaje,
+            "parse_mode": "Markdown"
+        }
+    )
+
+    if response.status_code != 200:
+        print("❌ Error enviando a Telegram:", response.text)
+        return '❌ Error al enviar a Telegram', 500
 
     return '✅ Mensaje enviado', 200
 
