@@ -27,21 +27,20 @@ def alerta():
         return '❌ No se recibió JSON', 400
 
     mensaje = f"""
-📡 Señal de TradingView
-🔍 Estrategia: {data.get('strategy', '❓')}
-🧠 Setup: {data.get('setup', '❓')}
-📊 Símbolo: {data.get('symbol', '❓')}
+📡 *Gold Phinder*
+📊 Símbolo: `{data.get('symbol', '❓')}`
+🕒 Temporalidad: `{data.get('timeframe', '❓')}`
+📈 Acción: *{data.get('action', '❓').upper()}*
 
-📥 Entrada: {data.get('entry', '❓')}
-🛑 Stop Loss: {data.get('stoploss', '❓')}
+📥 Entrada: `{data.get('entry', '❓')}`
+🛑 Stop Loss: `{data.get('stoploss', '❓')}`
 
-🎯 Take Profit:
-- TP1: {data.get('tp1', '❓')}
-- TP2: {data.get('tp2', '❓')}
-- TP3: {data.get('tp3', '❓')}
+🎯 Take Profits:
+- TP1: `{data.get('tp1', '❓')}`
+- TP2: `{data.get('tp2', '❓')}`
+- TP3: `{data.get('tp3', '❓')}`
+"""
 
-🕒 Temporalidad: {data.get('timeframe', '❓')}
-    """
 
     response = requests.post(
         f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
