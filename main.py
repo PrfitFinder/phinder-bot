@@ -1,3 +1,23 @@
+from flask import Flask, request
+import requests
+
+app = Flask(__name__)
+
+# Bot de Telegram
+BOT_TOKEN = '7664866864:AAHr_QWJqM5mwPOEx449s3IAd2Kx5hRuTA4'
+CHAT_ID = '1384640313'  # Tu chat ID
+
+@app.route('/')
+def home():
+    requests.post(
+        f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
+        data={
+            "chat_id": CHAT_ID,
+            "text": "📡 Webhook activo"
+        }
+    )
+    return '✅ Webhook activo', 200
+
 @app.route('/alerta', methods=['POST'])
 def alerta():
     data = request.get_json()
@@ -37,3 +57,6 @@ def alerta():
         return '❌ Error al enviar a Telegram', 500
 
     return '✅ Mensaje enviado', 200
+
+if __name__ == '__main__':
+    app.run(debug=True)
