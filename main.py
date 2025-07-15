@@ -13,13 +13,17 @@ CHAT_ID = '1384640313'
 def home():
     return '✅ Webhook activo', 200
 
-@app.route('/alerta', methods=['POST'])
-def alerta():
-    data = request.get_json()
-    print("📩 Datos recibidos:", data)
+@app.route('/')
+def home():
+    requests.post(
+        f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
+        data={
+            "chat_id": CHAT_ID,
+            "text": "📡 Webhook activo"
+        }
+    )
+    return '✅ Webhook activo', 200
 
-    if not data:
-        return '❌ No se recibió JSON', 400
 
 mensaje = f"""
 📡 *Señal de TradingView*
