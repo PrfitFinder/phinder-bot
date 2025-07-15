@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 # Bot de Telegram
 BOT_TOKEN = '7664866864:AAHr_QWJqM5mwPOEx449s3IAd2Kx5hRuTA4'
-CHAT_ID = '1384640313'  # Tu chat ID
+CHAT_ID = '-1002432886395'  # Tu chat ID
 
 @app.route('/')
 def home():
