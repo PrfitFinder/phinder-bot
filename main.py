@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 # Bot de Telegram
-BOT_TOKEN = '7664866864:AAHr_QWJqM5mwPOEx449s3IAd2Kx5hRuTA4'
+BOT_TOKEN = '7664866864:AAEEl2hTD7nCZyFthtQMlcqkG_yIYF14Acw'
 CHAT_ID = '-1002432886395'  # Tu chat ID
 
 @app.route('/')
