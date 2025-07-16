@@ -9,13 +9,7 @@ CHAT_ID = '-1002432886395'  # Tu chat ID
 
 @app.route('/')
 def home():
-    requests.post(
-        f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
-        data={
-            "chat_id": CHAT_ID,
-            "text": "📡 Webhook activo"
-        }
-    )
+    # Solo responder sin mandar mensaje al grupo
     return '✅ Webhook activo', 200
 
 @app.route('/alerta', methods=['POST'])
